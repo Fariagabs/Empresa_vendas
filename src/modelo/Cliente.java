@@ -1,29 +1,41 @@
 package modelo;
 
-public class Cliente {
-	private String nome;
-	private String email;
-	private String sexo;
-	private static int codCliente = 0;
+public class Cliente extends Pessoa{
+
+	private static int idCliente = 1;
 
 	public String toString() {
 		return "Nome: " + nome + "; Email: " + email + "; Sexo: " + sexo;
 	}
 	
-	public String codigoCliente(){
-		return "C" + Cliente.codCliente;
+	@Override
+	public String identificador(){
+		String id;
+		id = "C" + this.cod;
+		return id;
 	}
 	
 	public Cliente(String nome, String email, String sexo) {
-		Cliente.codCliente = Cliente.codCliente + 1;
-		this.nome = nome;
-		this.email = email;
-		this.sexo = sexo;
+		super(nome, email, sexo);
+		this.cod = idCliente++;
 	}
 
-	public Cliente(Cliente cliente) {
-		this.nome = cliente.nome;
-		this.email = cliente.email;
-		this.sexo = cliente.sexo;
+	public Cliente(Cliente cliente, String nome, String email, String sexo) {
+		super(nome, email, sexo);
+		this.cod = cliente.cod;
 	}
+	
+	public Cliente getCliente() {
+		return new Cliente(nome, email, sexo);
+	}
+
+	public String tratamento() {
+		if(sexo.equals("Masculino") || sexo.equals("masculino")) {
+			return "Prezado Senhor " + nome;
+		}else {
+			return "Prezada Senhora " + nome;
+		}
+		
+	}
+
 }

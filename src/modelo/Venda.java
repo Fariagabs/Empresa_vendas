@@ -4,73 +4,46 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Venda {
-	private static int idVenda = 0;
-	private String dataVenda;
+	private static int idVenda = 1;
+	private int codVenda = 0;
+	private String dtVenda;
 	private Produto produto;
 	private double valor;
 	private Cliente cliente;
 	private Fornecedor fornecedor;
+	private Pagamento pagamento;
+	
 	
 	public String toString() {
-		return dataVenda + " - " + getProduto() + " - " + " R$" + valor + " - Cliente:" + getCliente() + "- Fornecedor:" + getFornecedor();
+		return dtVenda + " - " + this.produto.getProduto() + " - " + " R$" + valor + " - Cliente:" + this.cliente.getCliente() + "- Fornecedor:" + this.fornecedor.getFornecedor() + " - Pagamento: " + IdentificadorDePagamento.getTipo(pagamento);
 	}
 
 	
-	public String Id (){
+	public String Id (String dtVenda){
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate ano = LocalDate.parse(dataVenda, formatter);
-		String id = ano.getYear() + " - " + Venda.idVenda;
-		return id;
+		LocalDate dataVenda = LocalDate.parse(dtVenda,formatter);
+		String identificador = dataVenda.getYear() + " - " + this.codVenda;
+		return identificador;
 	}
-	
-	
-	public Venda (String dataVenda, Produto produto, double valor, Cliente cliente, Fornecedor fornecedor) {
-		Venda.idVenda = idVenda + 1;
-		this.dataVenda = dataVenda;
-		this.setProduto(produto);
-		this.valor = valor;
-		this.setCliente(cliente);
-		this.setFornecedor(fornecedor);
-	}
-	
 
+	
+	public Venda (String dtVenda, Produto produto, double valor, Cliente cliente, Fornecedor fornecedor, Pagamento pagamento) {
+		this.codVenda = idVenda++;
+		this.dtVenda = dtVenda;
+		this.produto = produto;
+		this.valor = valor;
+		this.cliente = cliente;
+		this.fornecedor = fornecedor;
+		this.pagamento = pagamento;
+	}
+	
 
 	public String DataVenda() {
-		return this.dataVenda;
+		return this.dtVenda;
 	}
 	
 	public double Valor(){
 		return this.valor;
 	}
 
-
-	public Fornecedor getFornecedor() {
-		return new Fornecedor(this.fornecedor);
-	}
-
-
-	public void setFornecedor(Fornecedor fornecedor) {
-		this.fornecedor = fornecedor;
-	}
-
-
-	public Produto getProduto() {
-		return new Produto(this.produto);
-	}
-
-
-	public void setProduto(Produto produto) {
-		this.produto = produto;
-	}
-
-
-	public Cliente getCliente() {
-		return new Cliente(this.cliente);
-	}
-
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-	
 }
