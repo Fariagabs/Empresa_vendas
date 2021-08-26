@@ -3,7 +3,6 @@ package modelo;
 public class Fornecedor extends Pessoa {
 	private String cargo;
 	private String descricao_empresa;
-	private static int idFornecedor = 1;
 	
 	public String toString() {
 		return "Nome: " + nome + "; Cargo: " + cargo + "; Email: " + email + "; Sexo: " + sexo + "; Descrição da empresa: "  + descricao_empresa;
@@ -19,7 +18,7 @@ public class Fornecedor extends Pessoa {
 	
 	public Fornecedor(String nome, String cargo, String email, String sexo, String descricao_empresa){
 		super(nome, email, sexo);
-		this.cod = idFornecedor++;
+		this.cod = id;
 		this.cargo = cargo;
 		this.descricao_empresa = descricao_empresa;
 	}
@@ -35,7 +34,7 @@ public class Fornecedor extends Pessoa {
 		return new Fornecedor(nome, email, sexo, cargo, descricao_empresa);
 	}
 	
-	public String tratamento() {
+	public  String tratamento() {
 		if(sexo.equals("Masculino") || sexo.equals("masculino")) {
 			return "Prezado Colaboradora " + nome;
 		}else {

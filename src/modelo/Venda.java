@@ -15,7 +15,7 @@ public class Venda {
 	
 	
 	public String toString() {
-		return dtVenda + " - " + this.produto.getProduto() + " - " + " R$" + valor + " - Cliente:" + this.cliente.getCliente() + "- Fornecedor:" + this.fornecedor.getFornecedor() + " - Pagamento: " + IdentificadorDePagamento.getTipo(pagamento);
+		return dtVenda + " - PRODUTO: " + this.produto.getProduto() + " - " + " R$" + valor + " - CLIENTE:" + this.cliente.getCliente() + "- FORNECEDOR:" + this.fornecedor.getFornecedor() + " - PAGAMENTO: " + IdentificadorDePagamento.getTipo(pagamento);
 	}
 
 	
@@ -41,9 +41,16 @@ public class Venda {
 	public String DataVenda() {
 		return this.dtVenda;
 	}
-	
-	public double Valor(){
+
+	public double getValor(){
 		return this.valor;
 	}
-
+	
+	public String getNomeProduto() {
+		return produto.getNome();
+	}
+	
+	public Cliente getCliente() {
+		return this.cliente;
+	}
 }

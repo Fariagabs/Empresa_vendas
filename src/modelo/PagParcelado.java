@@ -6,34 +6,42 @@ public class PagParcelado extends Pagamento{
 	
 	private double juros;
 	private int parcelas;
-	private double valorPagamento;
-	private double calcJurosParcelas;
-	private double valorParcela;
 
-
-	public PagParcelado(double valorVenda, double juros, int parcelas) {
+	public PagParcelado(double valorVenda, double juros, int parcelas) throws MuitasParcelasException {
 		super(valorVenda);
 		this.juros = juros;
-		this.parcelas = parcelas;
+		this.setParcelas(parcelas);
 	}
 	
-	public double calcValorPagamento() {
+	public double jurosSobreParcelas() {
 		double j = juros / 100;
 		double jurosReal = 1;
 		jurosReal = jurosReal + j;
-		calcJurosParcelas = Math.pow(jurosReal, parcelas);
-		valorPagamento = valorVenda * calcJurosParcelas;
+		double jurosParcelas = Math.pow(jurosReal, parcelas);
+		return jurosParcelas;
+	}
+	
+	
+	public void setParcelas(int parcelas) throws MuitasParcelasException {
+		if (parcelas > 6) {
+			throw new MuitasParcelasException("Pagamento maior que 6 parcelas não é permitido!");
+		}
+		this.parcelas = parcelas;
+	}
+
+	private double ValorPagamento() {
+		double valorPagamento = valorVenda * jurosSobreParcelas();
 		return valorPagamento;
 	}
 	
 	private String mostraPagamento() {
-		float valor = (float) calcValorPagamento();
+		float valor = (float) ValorPagamento();
 		DecimalFormat f = new DecimalFormat("#.##");
 		return f.format(valor);
 	}
 	
 	public double calculoParcela() {
-		valorParcela = calcValorPagamento() * calcJurosParcelas;
+		double valorParcela = ValorPagamento() * jurosSobreParcelas();
 		return valorParcela;
 	}
 	

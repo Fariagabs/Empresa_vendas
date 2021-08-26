@@ -1,11 +1,12 @@
 package modelo;
 
 
-public  class Pessoa {
+public abstract class Pessoa {
 	protected String nome;
 	protected String sexo;
 	protected String email;
-	protected int cod;
+	protected int cod = 0;
+	protected static int id = 1;
 	
 	public Pessoa (String nome, String email, String sexo) {
 		super();
@@ -14,11 +15,9 @@ public  class Pessoa {
 		this.sexo = sexo;
 	}
 	
-	public String identificador() {
-		String id = "0";
-		return id;
-	}
-
+	public abstract String identificador();
+	
+	public abstract String tratamento();
 }
 
 	

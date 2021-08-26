@@ -31,7 +31,7 @@ public class Historico {
 		public static float lucroTotal() {
 			float lucro = 0;
 			for (Venda lista : listaVendas) {
-				lucro = (float) (lucro + lista.Valor());
+				lucro = (float) (lucro + lista.getValor());
 			}
 			return lucro;
 		}

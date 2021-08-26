@@ -2,7 +2,8 @@ package modelo;
 
 public class Cliente extends Pessoa{
 
-	private static int idCliente = 1;
+	
+	private double gastos;
 
 	public String toString() {
 		return "Nome: " + nome + "; Email: " + email + "; Sexo: " + sexo;
@@ -15,18 +16,34 @@ public class Cliente extends Pessoa{
 		return id;
 	}
 	
-	public Cliente(String nome, String email, String sexo) {
+	public Cliente(String nome, String email, String sexo, double gastos) {
 		super(nome, email, sexo);
-		this.cod = idCliente++;
+		this.cod = id;
 	}
 
-	public Cliente(Cliente cliente, String nome, String email, String sexo) {
+	public Cliente(Cliente cliente, String nome, String email, String sexo, double gastos) {
 		super(nome, email, sexo);
 		this.cod = cliente.cod;
+		this.gastos = gastos;
 	}
 	
 	public Cliente getCliente() {
-		return new Cliente(nome, email, sexo);
+		return new Cliente(nome, email, sexo, gastos);
+	}
+	
+
+	public String getNome() {
+		return nome;
+	}
+	
+	
+	public double getGastos() {
+		return gastos;
+	}
+
+	public double setGastos(Venda venda) {
+		this.gastos = this.gastos + venda.getValor();
+		return gastos;
 	}
 
 	public String tratamento() {
